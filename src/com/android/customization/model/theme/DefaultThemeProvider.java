@@ -165,13 +165,21 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
                 mOverlayProvider.addSystemDefaultStyle(builder);
             }
 
-            String styleSettingsOverlayPackage = getOverlayPackage(UISTYLE_SETTINGS_PREFIX,
-                    themeName);
-            mOverlayProvider.addNoPreviewUiStyleOverlay(builder, styleSettingsOverlayPackage);
+            try {
+                String styleSettingsOverlayPackage = getOverlayPackage(UISTYLE_SETTINGS_PREFIX,
+                        themeName);
+                mOverlayProvider.addNoPreviewUiStyleOverlay(builder, styleSettingsOverlayPackage);
+            } catch (NotFoundException e) {
+                Log.d(TAG, "Couldn't find settings style overlay, won't do anything.");
+            }
 
-            String styleSysUiOverlayPackage = getOverlayPackage(UISTYLE_SYSUI_PREFIX,
-                    themeName);
-            mOverlayProvider.addNoPreviewUiStyleOverlay(builder, styleSysUiOverlayPackage);
+            try {
+                String styleSysUiOverlayPackage = getOverlayPackage(UISTYLE_SYSUI_PREFIX,
+                        themeName);
+                mOverlayProvider.addNoPreviewUiStyleOverlay(builder, styleSysUiOverlayPackage);
+            } catch (NotFoundException e) {
+                Log.d(TAG, "Couldn't find SystemUI style overlay, won't do anything.");
+            }
 
             try {
                 String fontOverlayPackage = getOverlayPackage(FONT_PREFIX, themeName);
@@ -218,13 +226,21 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
                 mOverlayProvider.addSystemDefaultIcons(builder, SYSUI_PACKAGE, ICONS_FOR_PREVIEW);
             }
 
-            String iconLauncherOverlayPackage = getOverlayPackage(ICON_LAUNCHER_PREFIX,
-                    themeName);
-            mOverlayProvider.addNoPreviewIconOverlay(builder, iconLauncherOverlayPackage);
+            try {
+                String iconLauncherOverlayPackage = getOverlayPackage(ICON_LAUNCHER_PREFIX,
+                        themeName);
+                mOverlayProvider.addNoPreviewIconOverlay(builder, iconLauncherOverlayPackage);
+            } catch (NotFoundException e) {
+                Log.d(TAG, "Couldn't find launcher icons overlay, won't do anything.");
+            }
 
-            String iconSettingsOverlayPackage = getOverlayPackage(ICON_SETTINGS_PREFIX,
-                    themeName);
-            mOverlayProvider.addNoPreviewIconOverlay(builder, iconSettingsOverlayPackage);
+            try {
+                String iconSettingsOverlayPackage = getOverlayPackage(ICON_SETTINGS_PREFIX,
+                        themeName);
+                mOverlayProvider.addNoPreviewIconOverlay(builder, iconSettingsOverlayPackage);
+            } catch (NotFoundException e) {
+                Log.d(TAG, "Couldn't find settings icons overlay, won't do anything.");
+            }
 
             addWallpaper(themeName, builder);
 
